@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: service-order
+  aop:
+    auto: true
+    proxy-target-class: true
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  jersey:
+    application-path: /rest
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}/service_order
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:dev}
+    tomcat:
+      max-active: 50
+  cloud:
+    consul:
+      enabled: true
+      discovery:
+        enabled: true
+        register: true
+        tags: dev prod
+        default-query-tag: ${CONSULT_DEFAULT_TAG:dev}
+        heartbeat:
+          enabled: true
+      host: ${CONSUL_HOST:localhost}
+  profiles:
+    active: local
+
+flyway:
+  enabled: true
+  out-of-order: true
+  encoding: UTF-8
+
+korprulu:
+  jersey:
+    access_control_allow_origin: '*'
+
+server:
+  port: 8080
+  context-path: /
+  servlet-path: /
+
+management:
+  context-path: /system
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate: ERROR
+
+endpoints:
+  env:
+    enabled: true
+
+---
+spring:
+  profiles: local

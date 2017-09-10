@@ -1,0 +1,13 @@
+spring:
+  datasource:
+      url: jdbc:mysql://127.0.0.1/service_order
+      username: root
+      password: dev
+      driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    consul:
+      enabled: false
+
+korprulu:
+  eureka:
+    enabled: false
